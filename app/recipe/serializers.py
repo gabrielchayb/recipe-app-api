@@ -61,8 +61,9 @@ class RecipeSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """Create a recipe."""
         tags = validated_data.pop('tags', [])
-        recipe = Recipe.objects.create(**validated_data)
         ingredients = validated_data.pop('ingredients', [])
+        recipe = Recipe.objects.create(**validated_data)
+
         self._get_or_create_tags(tags, recipe)
         self._get_or_create_ingredients(ingredients, recipe)
 
@@ -80,16 +81,6 @@ class RecipeSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
-    
-    
-class TagSerializer(serializers.ModelSerializer):
-    """Serializer for tags."""
-
-    class Meta:
-        model = Tag
-        fields = ['id', 'name']
-        read_only_fields = ['id']
-
 
 class RecipeDetailSerializer(RecipeSerializer):
     """Serializer for recipe detail view."""
