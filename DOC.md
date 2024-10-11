@@ -10,7 +10,12 @@ App
 
 // app
 
-// core
+- settings.py 
+- tests.py: arquivo do testes  
+
+// core 
+- // management - wait_for_db:
+- // migrations:
 
 // recipe 
 
